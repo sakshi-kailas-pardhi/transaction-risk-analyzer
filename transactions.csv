@@ -1,0 +1,8 @@
+user_id,amount,location,time
+U101,500,Kolkata,10:30
+U101,95000,Mumbai,10:42
+U205,300,Delhi,11:01
+U101,200,Kolkata,11:05
+U301,70000,Chennai,11:15
+U205,150,Delhi,11:18
+U101,120000,Delhi,11:20
