@@ -65,6 +65,21 @@ for user in data["user_id"].unique():
         "INSERT INTO flagged_transactions VALUES (?, ?, ?, ?, ?)",
         (row["user_id"], row["amount"], row["location"], str(row["time"]), "Rapid Transactions")
     )
+        conn.commit()
+
+        
+         # Detect impossible travel
+location_change = user_data["location"] != user_data["location"].shift()
+impossible_travel = (time_diff < pd.Timedelta(minutes=60)) & location_change
+
+impossible_transactions = user_data[impossible_travel]
+
+for _, row in impossible_transactions.iterrows():
+    cursor.execute(
+        "INSERT INTO flagged_transactions VALUES (?, ?, ?, ?, ?)",
+        (row["user_id"], row["amount"], row["location"], str(row["time"]), "Impossible Travel")
+    )
+
 conn.commit()
 
 
